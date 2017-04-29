@@ -1,3 +1,5 @@
+// HOMEWORK #3: Hangman-Game
+
 var options = ["BATMAN", "SUPERMAN", "FLASH", "WOLVERINE", "SPIDER-MAN", "THOR"];
 var wins = 0;
 		
@@ -67,7 +69,5 @@ function hangman(guessWord) {
 	};
 }
 
-
-
-
+// Calling hangman() function
 hangman(options[Math.floor(Math.random()*options.length)]);

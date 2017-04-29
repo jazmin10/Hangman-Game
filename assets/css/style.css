@@ -1,3 +1,4 @@
+/*HOMEWORK #3: Hangman-Game*/
 * {
 	box-sizing: border-box;
 }
@@ -53,9 +54,8 @@ img {
 	font-size: 25px;
 	margin-right: 30px;
 	margin-left: 30px;
+	margin-bottom: 50px;
 }
-
-
 
 footer {
 	text-align: center;
