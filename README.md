@@ -1,4 +1,4 @@
-# Let's play Hangman!
+# JavaScript - The Language of the Web
 
 ### Overview
 
