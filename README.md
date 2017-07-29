@@ -19,9 +19,10 @@ In this project I created an app that features the popular game Hangman. The app
 
 The following screenshots demonstrate the essence of the game. 
 
-    * You will notice there is a section for wins, the current word, guesses left, and letters already guessed.
+* You will notice there is a section for wins, the current word, guesses left, and letters already guessed.
 
-        ![gameSection](assets/images/gameSection.png)
-    * If a word is guessed, you will see the word across the page
+![gameSection](assets/images/gameSection.png)
 
-        ![winPage](assets/images/winPage.png)
+* If a word is guessed, you will see the word across the page
+
+![winPage](assets/images/winPage.png)
