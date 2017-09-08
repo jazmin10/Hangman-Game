@@ -15,7 +15,9 @@ In this project I created an app that features the popular game Hangman. The app
     *Letters Already Guessed
 4. After the user wins/loses, the game should automatically choose another word and make the user play it
 
-### Screenshots
+### Preview
+
+![web-preview](https://media.giphy.com/media/kNmKWaJX23vQ4/giphy.gif)
 
 The following screenshots demonstrate the essence of the game. 
 
