@@ -154,7 +154,27 @@
 		displayWrongGuesses: function() {
 			let stringWrongGuesses = wrongGuesses.join(` , `);
 			document.querySelector(`#lettersGuessed`).innerHTML = `Letters already guessed: ${stringWrongGuesses}`;
-		} 
+		},
+
+		// Check if an user has won or lost
+		checkWinLoss: function() {
+			let wordImage = this.wordsToGuess[index].src;
+
+			// If the user guessed the word, notify the user they won the round
+			if (currentDisplay.indexOf(` _ `) === -1) {
+				wins++;
+
+				document.querySelector(`#instructions`).innerHTML = `You won! Press any key to continue`;
+				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
+				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
+			}
+			// If the user did not guess the word, notify the user they lost the round
+			else if (guessesLeft === 0) {
+				document.querySelector(`#instructions`).innerHTML = `You lost! Press any key to continue`;
+				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
+				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
+			}
+		}
 	}
 
 
@@ -221,6 +241,7 @@
 				hangmanGame.displayGuessesLeft();
 			}
 			
+			hangmanGame.checkWinLoss();
 		}
 	};
 
