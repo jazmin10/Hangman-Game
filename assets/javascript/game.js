@@ -74,7 +74,7 @@
 
 // ============ GLOBAL VARIABLES ============
 	let wins = 0, guessesLeft = 0, currentWord = [],
-		currentDisplay = [], wrongLettersGuessed = [],
+		currentDisplay = [], wrongGuesses = [],
 		lettersGuessed = [], index = 0, 
 		placeholderPicture = `<img src="./assets/images/superheroes.jpg">`;
 
@@ -124,9 +124,19 @@
 			}
 		},
 
+		// Adds all guesses to the lettersGuessed array
+		setLettersGuessed: function(guess) {
+			lettersGuessed.push(guess);
+		},
+
+		// Add a wrong guess to the wrongGuesses array
+		setWrongGuesses: function(wrongGuess) {
+			wrongGuesses.push(wrongGuess);
+		},
+
 		// Displays hangman word to the screen
 		displayHangmanWord: function() {
-			let wordToDisplay = currentDisplay.join(``);
+			let wordToDisplay = currentDisplay.join(` `);
 			document.querySelector(`#currentWord`).innerHTML = `Current Word:<br/> ${wordToDisplay}`;
 		},
 
@@ -142,7 +152,7 @@
 
 		// Display guesses that were wrong
 		displayWrongGuesses: function() {
-			let stringWrongGuesses = wrongLettersGuessed.join(` , `);
+			let stringWrongGuesses = wrongGuesses.join(` , `);
 			document.querySelector(`#lettersGuessed`).innerHTML = `Letters already guessed: ${stringWrongGuesses}`;
 		} 
 	}
@@ -170,10 +180,52 @@
 		hangmanGame.displayWrongGuesses();
 	};
 
+	let gameLogic = event => {
+
+		// If the round is NOT over (there are guesses left and the word hasn't been guessed)...
+		if (guessesLeft > 0 && currentDisplay.indexOf(` _ `) !== -1) {
+
+			let userGuess = event.key.toUpperCase();
+
+			// if the userGuess has already been guessed, do nothing and exit function
+			if (lettersGuessed.indexOf(userGuess) !== -1) {
+				return;
+			}
+
+			// add the  userGuess to the list of letters guessed
+			hangmanGame.setLettersGuessed(userGuess);
+
+			// If the guess is correct, then display all instances of the guess 
+			// in the hangman word
+			if (currentWord.indexOf(userGuess) !== -1) {
+
+				// Store the first instance of the userGuess
+				let userGuessIndex = currentWord.indexOf(userGuess);
+
+				// While there is an instance of the userGuess... 
+				while (userGuessIndex !== -1) {
+					// set the letter in the appropiate index
+					currentDisplay[userGuessIndex] = userGuess;
+					// continue the search AFTER the last instance 
+					userGuessIndex = currentWord.indexOf(userGuess, userGuessIndex + 1);
+				}
+
+				hangmanGame.displayHangmanWord();
+			}
+			else {
+				// hangmanGame.setWrongGuesses(userGuess);
+			}
+			
+		}
+	};
+
 // ============ MAIN PROCESSES ============
 
 	// Start the game
 	startGame();
+
+	// When a key is pressed...
+	document.onkeyup = gameLogic;
 
 
 
