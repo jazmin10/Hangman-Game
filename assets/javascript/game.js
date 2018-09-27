@@ -167,6 +167,7 @@
 				document.querySelector(`#instructions`).innerHTML = `You won! Press any key to continue`;
 				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
 				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
+				this.displayWins();
 			}
 			// If the user did not guess the word, notify the user they lost the round
 			else if (guessesLeft === 0) {
@@ -174,6 +175,20 @@
 				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
 				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
 			}
+		},
+
+		// Advance to the next game's round
+		nextRound: function() {
+			index++;
+
+			currentWord = [];
+			currentDisplay = [];
+			wrongGuesses = [];
+			lettersGuessed = [];
+
+			document.querySelector(`#word`).innerHTML = ``;
+
+			startGame();
 		}
 	}
 
@@ -242,6 +257,18 @@
 			}
 			
 			hangmanGame.checkWinLoss();
+		}
+		// If the round is over...
+		else {
+			// move on to the next round
+			if (index < hangmanGame.wordsToGuess.length - 1) {
+				hangmanGame.nextRound();
+			}
+			// or finish the game
+			else {
+
+			}
+
 		}
 	};
 
