@@ -212,8 +212,13 @@
 
 				hangmanGame.displayHangmanWord();
 			}
+			// If a guess is wrong update list of wrong guesses and guesses left
 			else {
-				// hangmanGame.setWrongGuesses(userGuess);
+				hangmanGame.setWrongGuesses(userGuess);
+				guessesLeft--;
+
+				hangmanGame.displayWrongGuesses();
+				hangmanGame.displayGuessesLeft();
 			}
 			
 		}
