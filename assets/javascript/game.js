@@ -76,9 +76,9 @@
 	let wins = 0, guessesLeft = 0, currentWord = [],
 		currentDisplay = [], wrongGuesses = [],
 		lettersGuessed = [], index = 0, 
-		placeholderPicture = `<img src="./assets/images/superheroes.jpg">`;
+		placeholderPicture = `./assets/images/superheroes.jpg`;
 
-	// hangmanGame object: 
+	// hangmanGame object: contains game setup
 		// Using function() syntax instead of arrow functions because 
 		// we want this to be the hangmanGame object, NOT the window.
 		// With arrow functions we have lexical scoping
@@ -96,7 +96,7 @@
 			src: `./assets/images/Flash.jpg`
 		}, {
 			word: `WOLVERINE`,
-			src: `./assets/images/Wolvering.jpg`
+			src: `./assets/images/Wolverine.jpg`
 		}, {
 			word: `SPIDER-MAN`,
 			src: `./assets/images/Spider-Man.jpg`
@@ -156,6 +156,21 @@
 			document.querySelector(`#lettersGuessed`).innerHTML = `Letters already guessed: ${stringWrongGuesses}`;
 		},
 
+		// Display instructions to the user
+		displayInstructions: function(message) {
+			document.querySelector(`#instructions`).innerHTML = message;
+		},
+
+		// Display image as either placeholder OR photo of answer
+		displayImage: function(imgSource) {
+			document.querySelector(`#image`).innerHTML = `<img src=${imgSource} alt="superheroe">`;
+		},
+
+		// Display answer
+		displayAnswer: function(str) {
+			document.querySelector(`#answer`).innerHTML = str;
+		},
+
 		// Check if an user has won or lost
 		checkWinLoss: function() {
 			let wordImage = this.wordsToGuess[index].src;
@@ -164,31 +179,43 @@
 			if (currentDisplay.indexOf(` _ `) === -1) {
 				wins++;
 
-				document.querySelector(`#instructions`).innerHTML = `You won! Press any key to continue`;
-				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
-				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
+				this.displayInstructions(`You won! Press any key to continue`);
+				this.displayImage(wordImage);
+				this.displayAnswer(this.wordsToGuess[index].word);
 				this.displayWins();
 			}
 			// If the user did not guess the word, notify the user they lost the round
 			else if (guessesLeft === 0) {
-				document.querySelector(`#instructions`).innerHTML = `You lost! Press any key to continue`;
-				document.querySelector(`#image`).innerHTML = `<img src=${wordImage}>`;
-				document.querySelector(`#word`).innerHTML = `<h2>${currentWord.join("")}</h2>`;
+				this.displayInstructions(`You lost. Press any key to continue`);
+				this.displayImage(wordImage);
+				this.displayAnswer(this.wordsToGuess[index].word);
 			}
 		},
 
 		// Advance to the next game's round
 		nextRound: function() {
+			// Increase index by 1 to move to the next word
 			index++;
 
+			// Reset variables for the next round
 			currentWord = [];
 			currentDisplay = [];
 			wrongGuesses = [];
 			lettersGuessed = [];
-
-			document.querySelector(`#word`).innerHTML = ``;
-
+			this.displayAnswer(``);
 			startGame();
+		},
+
+		// End the game
+		endGame: function() {
+			this.displayInstructions(`END OF GAME`);
+			// add end-game class to #game for styling
+			document.querySelector(`#game`).classList.add(`end-game`);
+
+			// Remove everything except instructions message and wins
+			document.querySelector(`#currentWord`).innerHTML = ``;
+			document.querySelector(`#numberGuesses`).innerHTML = ``;
+			document.querySelector(`#lettersGuessed`).innerHTML = ``;
 		}
 	}
 
@@ -197,12 +224,7 @@
 
 	// Initialize the game by...
 	let startGame = () => {
-
-		// setting placeholder picture
-		document.querySelector(`#image`).innerHTML = placeholderPicture;
-		// Setting initial instructions
-		document.querySelector(`#instructions`).innerHTML = `START GUESSING...`;
-
+	
 		// setting up game
 		hangmanGame.setCurrentWord();
 		hangmanGame.setCurrentDisplay();
@@ -213,8 +235,11 @@
 		hangmanGame.displayWins();
 		hangmanGame.displayGuessesLeft();
 		hangmanGame.displayWrongGuesses();
+		hangmanGame.displayImage(placeholderPicture);
+		hangmanGame.displayInstructions(`START GUESSING...`);
 	};
 
+	// Checks to determine the next step in the game
 	let gameLogic = event => {
 
 		// If the round is NOT over (there are guesses left and the word hasn't been guessed)...
@@ -266,7 +291,7 @@
 			}
 			// or finish the game
 			else {
-
+				hangmanGame.endGame();
 			}
 
 		}
