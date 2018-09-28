@@ -1,4 +1,6 @@
-/*HOMEWORK #3: Hangman-Game*/
+/* HANGMAN-GAME */
+
+/* Overall Styling */
 * {
 	box-sizing: border-box;
 }
@@ -11,6 +13,7 @@ body {
 	text-shadow: 3px 3px #a94442;
 }
 
+/* Title Section */
 #title {
 	text-align: center;
 	margin-bottom: 60px;
@@ -27,26 +30,28 @@ h2 {
 	margin-top: 0px;
 }
 
+/* Answer Section */
 #answer {
 	text-align: center;
 	font-size: 40px;
 }
 
+/* Image Section */
 #image {
 	border: solid;
 	border-color: white;
 	margin-left: 30px;
 	margin-right: 30px;
 	margin-bottom: 20px;
-
+	text-align: center;
 }
 
 img {
-	width: 100%;
 	padding: 10px;
 	height: 300px;
 }
 
+/* Game Section */
 #game {
 	border: solid;
 	border-color: white;
@@ -57,10 +62,13 @@ img {
 	margin-bottom: 50px;
 }
 
-.end-game {
-	margin-top: 100px;
-}
-
 footer {
 	text-align: center;
+}
+
+/* Media queries: Styling for game section when game ends */
+@media screen and (min-width: 992px) {
+	.end-game {
+		margin-top: 100px;
+	}	
 }
