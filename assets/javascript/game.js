@@ -91,6 +91,14 @@
 
 		// Display image as either placeholder OR photo of answer
 		displayImage: function(imgSource) {
+			// document.querySelector(`#image`).innerHTML = `<img src=${imgSource} alt="superheroe">`;
+
+			if (imgSource === placeholderPicture) {
+				document.querySelector(`#image`).innerHTML = `<img src=${imgSource}
+					alt="superheroe" class="placeholder">`;
+				return;
+			}
+
 			document.querySelector(`#image`).innerHTML = `<img src=${imgSource} alt="superheroe">`;
 		},
 

@@ -20,10 +20,9 @@ body {
 
 }
 
-h1 {
+#title h1 {
 	font-family: 'Anton', sans-serif;
 	margin-bottom: 0px;
-	font-size: 800%
 }
 
 h2 {
@@ -62,6 +61,10 @@ img {
 	margin-bottom: 50px;
 }
 
+#game p {
+	letter-spacing: 2px;
+}
+
 footer {
 	text-align: center;
 }
@@ -71,4 +74,18 @@ footer {
 	.end-game {
 		margin-top: 100px;
 	}	
+}
+
+/* Media queries: Hangman title */
+@media screen and (min-width: 460px) {
+	#title h1 {
+		font-size: 800%;
+	}
+}
+
+/* Media queries: placeholder image */
+@media screen and (max-width: 510px) {
+	#image img.placeholder {
+		width: 100%;
+	}
 }

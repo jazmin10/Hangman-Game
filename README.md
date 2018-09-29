@@ -25,6 +25,6 @@ The following screenshots demonstrate the essence of the game.
 
 ![gameSection](assets/images/gameSection.png)
 
-* If a word is guessed, you will see the word across the page
+* After each round, you will see the word across the page
 
 ![winPage](assets/images/winPage.png)
